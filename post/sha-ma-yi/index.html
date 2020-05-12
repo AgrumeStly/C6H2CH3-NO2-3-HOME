@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>杀蚂蚁 | TNTの小窝</title>
+<meta name="description" content="向着自己的梦想，前进！">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://github.com/TNTtian/C6H2CH3-NO2-3-HOME/favicon.ico?v=1589268442826">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://github.com/TNTtian/C6H2CH3-NO2-3-HOME/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://github.com/TNTtian/C6H2CH3-NO2-3-HOME">TNTの小窝</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>杀蚂蚁</h1>
+            <p class="article-meta">
+              2020-05-12
+              
+            </p>
+            
+            <div class="post-content">
+              <h1 id="杀虫计划游记">「杀虫计划」游记</h1>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathsize="2.488em"><mtext mathvariant="bold">没咕，禁止考古！！！</mtext></mstyle></mrow><annotation encoding="application/x-tex">\Huge\textbf{没咕，禁止考古！！！}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.70704168em;vertical-align:0em;"></span><span class="mord text sizing reset-size6 size11"><span class="mord textbf cjk_fallback">没咕，禁止考古！！！</span></span></span></span></span></span></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathsize="2.074em"><mtext mathvariant="bold">谁再考古，一律删除！</mtext></mstyle></mrow><annotation encoding="application/x-tex">\huge\textbf{谁再考古，一律删除！}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.4229921399999998em;vertical-align:0em;"></span><span class="mord text sizing reset-size6 size10"><span class="mord textbf cjk_fallback">谁再考古，一律删除！</span></span></span></span></span></span></p>
+<h2 id="day-0">Day 0</h2>
+<p>在犇犇里面立了一个 Flag ，<s>悲惨</s>，嘤嘤嘤~ ，附上：</p>
+<pre><code class="language-text">	粉丝120去做P2586
+</code></pre>
+<p>珂怕的「杀虫计划」就这样开始了。。。</p>
+<hr>
+<h2 id="day-1">Day 1</h2>
+<p>打算先读读题，建一些变量之类的，做好准备工作，附上代码：</p>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+#include&lt;cmath&gt;
+#define line cout &lt;&lt; endl
+using namespace std;
+const int NR = 25;
+struct Ant {
+	int x, y;
+	int direction;//1↑,2→,3↓,4←
+	bool is_there_a_cake = false;
+	int age;
+	int HP;
+	int level;
+};
+struct Map {
+	int x, y;
+	int pheromone;
+	bool battery_or_not = false;
+	bool Cake_or_not = false;
+	bool Is_it_an_ant_hole = false;
+};
+struct Turret {
+	int x, y;
+	int d, r;
+};
+int n, m, s, t;
+void we_are_ready() {
+	cin &gt;&gt; n &gt;&gt; m &gt;&gt; s &gt;&gt; d &gt;&gt; r;
+	for (int i = 1; i &lt;= s; i++) {
+		cin &gt;&gt; x[i] &gt;&gt; y[i];
+	}
+	cin &gt;&gt; t;
+	return;
+}
+int main() {
+	we_are_ready();
+	let_play();
+	game_result();
+	return 0;
+}
+</code></pre>
+<hr>
+<h2 id="day-2">Day 2</h2>
+<h3 id="上午">上午：</h3>
+<p>咕了\QAQ</p>
+<p>去 <s>睡觉</s> 肝 whk 去惹\QAQ</p>
+<h3 id="下午">下午：</h3>
+<p>从 17:00 开始，定期更新一次最新状态\QAQ</p>
+<h4 id="1700">17:00</h4>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+#include&lt;cmath&gt;
+#define line cout &lt;&lt; endl
+using namespace std;
+const int NR = 25;
+const int MR = 200005;
+struct Ant {
+	int x, y;//坐标 
+	int direction;//1↑,2→,3↓,4←
+	bool is_there_a_cake = false;//是否有蛋糕 
+	int age;//年龄 
+	int HP;//血量 
+	int level;//等级 
+};
+struct Map {
+	int x, y;//坐标 
+	int pheromone;//信息素 
+	bool battery_or_not = false;//是否有炮台 
+	bool Cake_or_not = false;//是否有蛋糕 
+	bool Is_it_an_ant_hole = false;//是否为蚂蚁洞 
+};
+struct Turret {
+	int x, y;//坐标 
+};
+Turret turret[NR];
+Ant ant[MR];
+int n, m, t, d, r;
+int ant_total;
+int turret_total;
+int now_level;
+
+void producing_ants();//产生蚂蚁 
+bool is_it_dead();//是否死亡 
+
+void we_are_ready() {
+	cin &gt;&gt; turret_total &gt;&gt; d &gt;&gt; r;
+	for (int i = 1; i &lt;= turret_total; i++) {
+		cin &gt;&gt; turret[i].x &gt;&gt; turret[i].y;
+	}
+	cin &gt;&gt; t;
+	return;
+}
+void let_play() {
+	
+} 
+int main() {
+	we_are_ready();
+	let_play();
+	game_result();
+	return 0;
+}
+
+void producing_ants() {
+	ant_total++;
+	if (ant_total % 6 == 0) {
+		now_level = ant_total / 6;
+	}
+	else {
+		now_level = ant_total / 6 + 1;
+	}
+	ant[ant_total].x = 0;
+	ant[ant_total].y = 0;
+	ant[ant_total].level = now_level;
+	ant[ant_total].HP = 1;
+	for (int i = 1; i &lt;= ant[ant_total].level; i++) {
+		ant[ant_total].HP *= 1.1;
+	}
+	ant[ant_total].HP *= 4;
+}
+bool is_it_dead(int x) {//参数：查询的是哪只蚂蚁 
+	if (ant[x].HP &lt; 0) return true;
+	return false;
+}
+</code></pre>
+<h4 id="1710">17:10</h4>
+<p>咕咕咕~</p>
+<h4 id="1723">17:23</h4>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+#include&lt;cmath&gt;
+#define line cout &lt;&lt; endl
+using namespace std;
+const int NR = 25;
+const int MR = 200005;
+const int MAP = 10;
+struct Ant {
+	int x, y;//坐标 
+	int direction;//1↑,2→,3↓,4←
+	bool is_there_a_cake = false;//是否有蛋糕 
+	int age;//年龄 
+	int HP;//血量 
+	int level;//等级 
+};
+struct Map {
+	int pheromone;//信息素 
+	bool battery_or_not = false;//是否有炮台 
+	bool Cake_or_not = false;//是否有蛋糕 
+	bool Is_it_an_ant_hole = false;//是否为蚂蚁洞 
+};
+struct Turret {
+	int x, y;//坐标 
+};
+Turret turret[NR];
+Ant ant[MR];
+Map map[MAP][MAP];
+int n, m, t, d, r;
+int ant_total;
+int turret_total;
+int now_level;
+
+void producing_ants();//产生蚂蚁 
+bool is_it_dead();//是否死亡 
+void leave_pheromone();
+
+void we_are_ready() {
+	cin &gt;&gt; turret_total &gt;&gt; d &gt;&gt; r;
+	for (int i = 1; i &lt;= turret_total; i++) {
+		cin &gt;&gt; turret[i].x &gt;&gt; turret[i].y;
+	}
+	cin &gt;&gt; t;
+	return;
+}
+void let_play() {
+	
+} 
+int main() {
+	we_are_ready();
+	let_play();
+	game_result();
+	return 0;
+}
+
+void producing_ants() {
+	ant_total++;
+	if (ant_total % 6 == 0) {
+		now_level = ant_total / 6;
+	}
+	else {
+		now_level = ant_total / 6 + 1;
+	}
+	ant[ant_total].x = 0;
+	ant[ant_total].y = 0;
+	ant[ant_total].level = now_level;
+	ant[ant_total].HP = 1;
+	for (int i = 1; i &lt;= ant[ant_total].level; i++) {
+		ant[ant_total].HP *= 1.1;
+	}
+	ant[ant_total].HP *= 4;
+}
+bool is_it_dead(int x) {//参数：查询的是哪只蚂蚁 
+	if (ant[x].HP &lt; 0) return true;
+	return false;
+}
+void leave_pheromone(int x) {//参数：这是哪只蚂蚁
+	if (ant[x].is_there_a_cake){
+		map[ant[x].x][ant[x].y] += 5;
+	}
+	else {
+		map[ant[x].x][ant[x].y] += 2;
+	}
+}
+</code></pre>
+<h4 id="173237">17:32:37</h4>
+<p>为了勉励窝一下，提交了一次（（（</p>
+<p><a href="https://www.luogu.com.cn/record/32909332">https://www.luogu.com.cn/record/32909332</a></p>
+<h4 id="2108">21:08</h4>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+#include&lt;cmath&gt;
+#define line cout &lt;&lt; endl
+using namespace std;
+const int NR = 25;
+const int MR = 200005;
+const int MAP = 10;
+struct Ant {
+	int x, y;//坐标 
+	int direction;//1东,2南,3西,4北 
+	bool is_there_a_cake = false;//是否有蛋糕 
+	int age;//年龄 
+	int HP;//血量 
+	int level;//等级 
+};
+struct Map {
+	int pheromone;//信息素 
+	bool battery_or_not = false;//是否有炮台 
+	bool Cake_or_not = false;//是否有蛋糕 
+	bool Is_it_an_ant_hole = false;//是否为蚂蚁洞 
+	bool is_it_ant = false;
+};
+struct Turret {
+	int x, y;//坐标 
+};
+Turret turret[NR];
+Ant ant[MR];
+Map mapp[MAP][MAP];
+int n, m, t, d, r;
+int ant_total;
+int turret_total;
+int now_level;
+bool are_there_ants_in_the_cave = false;
+
+void producing_ants();//产生蚂蚁 
+bool is_it_dead();//是否死亡 
+void leave_pheromone();//留下信息素
+int choose_direction();
+ 
+
+void we_are_ready() {
+	cin &gt;&gt; turret_total &gt;&gt; d &gt;&gt; r;
+	for (int i = 1; i &lt;= turret_total; i++) {
+		cin &gt;&gt; turret[i].x &gt;&gt; turret[i].y;
+	}
+	cin &gt;&gt; t;
+	return;
+}
+void let_play() {
+	
+} 
+int main() {
+	we_are_ready();
+	let_play();
+//	game_result();
+	return 0;
+}
+
+void producing_ants() {
+	ant_total++;
+	mapp[0][0].is_it_ant = true;
+	are_there_ants_in_the_cave = true;
+	if (ant_total % 6 == 0) {
+		now_level = ant_total / 6;
+	}
+	else {
+		now_level = ant_total / 6 + 1;
+	}
+	ant[ant_total].x = 0;
+	ant[ant_total].y = 0;
+	ant[ant_total].level = now_level;
+	ant[ant_total].HP = 1;
+	for (int i = 1; i &lt;= ant[ant_total].level; i++) {
+		ant[ant_total].HP *= 1.1;
+	}
+	ant[ant_total].HP *= 4;
+}
+bool is_it_dead(int x) {//参数：查询的是哪只蚂蚁 
+	if (ant[x].HP &lt; 0) return true;
+	return false;
+}
+void leave_pheromone(int x) {//参数：这是哪只蚂蚁
+	if (ant[x].is_there_a_cake){
+		mapp[ant[x].x][ant[x].y].pheromone += 5;
+	}
+	else {
+		mapp[ant[x].x][ant[x].y].pheromone += 2;
+	}
+}
+int choose_direction(int x) {//参数：这是哪只蚂蚁
+	bool _1 = true, _2 = true, _3 = true, _4 = true;//各路诸侯能否通过（（（ 
+	if(mapp[ant[x].x][ant[x].y + 1].is_it_ant || mapp[ant[x].x][ant[x].y + 1].battery_or_not) _1 = false;
+	if(mapp[ant[x].x + 1][ant[x].y].is_it_ant || mapp[ant[x].x + 1][ant[x].y].battery_or_not) _2 = false;
+	if(mapp[ant[x].x][ant[x].y - 1].is_it_ant || mapp[ant[x].x][ant[x].y - 1].battery_or_not) _3 = false;
+	if(mapp[ant[x].x - 1][ant[x].y].is_it_ant || mapp[ant[x].x - 1][ant[x].y].battery_or_not) _4 = false;
+	int maxx_ph = -1e5, maxx_1234;
+	if (maxx_ph &lt;= mapp[ant[x].x][ant[x].y + 1].pheromone) {
+		maxx_ph = mapp[ant[x].x][ant[x].y + 1].pheromone;
+		maxx_1234 = 1;
+	}
+	if (maxx_ph &lt;= mapp[ant[x].x + 1][ant[x].y].pheromone) {
+		maxx_ph = mapp[ant[x].x + 1][ant[x].y].pheromone;
+		maxx_1234 = 2;
+	}
+	if (maxx_ph &lt;= mapp[ant[x].x][ant[x].y - 1].pheromone) {
+		maxx_ph = mapp[ant[x].x][ant[x].y - 1].pheromone;
+		maxx_1234 = 3;
+	}
+	if (maxx_ph &lt;= mapp[ant[x].x - 1][ant[x].y].pheromone) {
+		maxx_ph = mapp[ant[x].x - 1][ant[x].y].pheromone;
+		maxx_1234 = 4;
+	}
+//	switch (maxx_1234) {
+//		case 1:
+//			_1 = 
+//	}
+//今天肝到这里 
+}
+</code></pre>
+<p>今天肝到这里 \QAQ</p>
+<hr>
+<h2 id="day-3">Day 3</h2>
+<h3 id="上午-2">上午：</h3>
+<p>咕一上午~ <s>被 whk 迫害（</s></p>
+<h3 id="下午-2">下午：</h3>
+<p>今天事情比较多，所以珂能就更一次\QAQ</p>
+<h4 id="1440">14:40</h4>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+#include&lt;cmath&gt;
+#define line cout &lt;&lt; endl
+using namespace std;
+const int NR = 25;
+const int MR = 200005;
+const int MAP = 10;
+struct Ant {
+	int x, y;//坐标 
+	int direction;//1东,2南,3西,4北 
+	bool is_there_a_cake = false;//是否有蛋糕 
+	int age;//年龄 
+	int HP;//血量 
+	int level;//等级 
+};
+struct Map {
+	int pheromone;//信息素 
+	bool battery_or_not = false;//是否有炮台 
+	bool Cake_or_not = false;//是否有蛋糕 
+	bool Is_it_an_ant_hole = false;//是否为蚂蚁洞 
+	bool is_it_ant = false;
+};
+struct Turret {
+	int x, y;//坐标 
+};
+Turret turret[NR];
+Ant ant[MR];
+Map mapp[MAP][MAP];
+int n, m, t, d, r;
+int ant_total;
+int turret_total;
+int now_level;
+bool are_there_ants_in_the_cave = false;
+
+void producing_ants();//产生蚂蚁 
+bool is_it_dead();//是否死亡 
+void leave_pheromone();//留下信息素
+int choose_direction();
+
+bool choose_direction_cmp(int x, int y) {
+	return x &gt; y;
+}
+
+
+void we_are_ready() {
+	cin &gt;&gt; turret_total &gt;&gt; d &gt;&gt; r;
+	for (int i = 1; i &lt;= turret_total; i++) {
+		cin &gt;&gt; turret[i].x &gt;&gt; turret[i].y;
+	}
+	cin &gt;&gt; t;
+	mapp[n][m].Cake_or_not = true;
+	mapp[0][0].Is_it_an_ant_hole = true;
+}
+void let_play() {
+	
+} 
+int main() {
+	we_are_ready();
+	let_play();
+//	game_result();
+	return 0;
+}
+
+void producing_ants() {
+	ant_total++;
+	mapp[0][0].is_it_ant = true;
+	are_there_ants_in_the_cave = true;
+	if (ant_total % 6 == 0) {
+		now_level = ant_total / 6;
+	}
+	else {
+		now_level = ant_total / 6 + 1;
+	}
+	ant[ant_total].x = 0;
+	ant[ant_total].y = 0;
+	ant[ant_total].level = now_level;
+	ant[ant_total].HP = 1;
+	for (int i = 1; i &lt;= ant[ant_total].level; i++) {
+		ant[ant_total].HP *= 1.1;
+	}
+	ant[ant_total].HP *= 4;
+}
+bool is_it_dead(int x) {//参数：查询的是哪只蚂蚁 
+	if (ant[x].HP &lt; 0) return true;
+	return false;
+}
+void leave_pheromone(int x) {//参数：这是哪只蚂蚁
+	if (ant[x].is_there_a_cake){
+		mapp[ant[x].x][ant[x].y].pheromone += 5;
+	}
+	else {
+		mapp[ant[x].x][ant[x].y].pheromone += 2;
+	}
+}
+int choose_direction(int x) {//参数：这是哪只蚂蚁
+	bool can_go[5] = {true}; 
+	int ph_4[5] = {0};
+	if(mapp[ant[x].x][ant[x].y + 1].is_it_ant || mapp[ant[x].x][ant[x].y + 1].battery_or_not) can_go[1] = false;
+	if(mapp[ant[x].x + 1][ant[x].y].is_it_ant || mapp[ant[x].x + 1][ant[x].y].battery_or_not) can_go[2] = false;
+	if(mapp[ant[x].x][ant[x].y - 1].is_it_ant || mapp[ant[x].x][ant[x].y - 1].battery_or_not) can_go[3] = false;
+	if(mapp[ant[x].x - 1][ant[x].y].is_it_ant || mapp[ant[x].x - 1][ant[x].y].battery_or_not) can_go[4] = false;
+	int flag = 0;
+	for (int i = 1; i &lt;= 4; i++) {
+		if (can_go[i]) flag++;
+	}
+	if (flag &gt; 1) {
+		ph_4[1] = mapp[ant[x].x][ant[x].y + 1].pheromone;
+		ph_4[2] = mapp[ant[x].x + 1][ant[x].y].pheromone;
+		ph_4[3] = mapp[ant[x].x][ant[x].y - 1].pheromone;
+		ph_4[4] = mapp[ant[x].x - 1][ant[x].y].pheromone;
+		int pph_4[5];
+		pph_4[1] = ph_4[1];
+		pph_4[2] = ph_4[2];
+		pph_4[3] = ph_4[3];
+		pph_4[4] = ph_4[4];
+		sort(ph_4 + 1, ph_4 + 4 + 1, choose_direction_cmp);
+		if (ph_4[1] == ph_4[2]) {
+//			暂咕 
+		}
+		else {
+			for (int i = 1; i &lt;= 4; i++) {
+				if (ph_4[1] == pph_4[i]) return i;
+			}
+		}
+	}
+	else {
+		for (int i = 1; i &lt;= 4; i++) {
+			if (can_go[i]) return i;
+		}
+	}
+}
+</code></pre>
+<h2 id="day-4">Day 4</h2>
+<p><s>因为有人催更，而且是：rui_er 大佬，根据这位大佬的洛谷定律，有人催更，窝必须托更，所以今天就咕咕咕吧\QAQ</s></p>
+<p>才不系，不要相信上面的（（（</p>
+<p><s>其实真的咕了（</s></p>
+<h2 id="2020423">2020.4.23</h2>
+<p>有人说窝咕了？考虑立Flag的后果？窝在想转弯的方法好吧！</p>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+#include&lt;cmath&gt;
+#define line cout &lt;&lt; endl
+using namespace std;
+const int NR = 25;
+const int MR = 200005;
+const int MAP = 10;
+struct Ant {
+	int x, y;//坐标 
+	int direction;//1东,2南,3西,4北 
+	bool is_there_a_cake = false;//是否有蛋糕 
+	int age;//年龄 
+	int HP;//血量 
+	int level;//等级 
+};
+struct Map {
+	int pheromone;//信息素 
+	bool battery_or_not = false;//是否有炮台 
+	bool Cake_or_not = false;//是否有蛋糕 
+	bool Is_it_an_ant_hole = false;//是否为蚂蚁洞 
+	bool is_it_ant = false;
+};
+struct Turret {
+	int x, y;//坐标 
+};
+struct Ph_4 {
+		int ph;//信息素 
+		bool phh = true;//能否通过 
+};
+Ph_4 ph_4[5];
+Turret turret[NR];
+Ant ant[MR];
+Map mapp[MAP][MAP];
+int n, m, t, d, r;
+int ant_total;
+int turret_total;
+int now_level;
+bool are_there_ants_in_the_cave = false;
+
+void producing_ants();//产生蚂蚁 
+bool is_it_dead();//是否死亡 
+void leave_pheromone();//留下信息素
+int choose_direction();
+
+bool choose_direction_cmp(Ph_4 x, Ph_4 y) {
+	if (x.ph &gt; y.ph) {
+		return true;
+	}
+	else {
+		x.phh 
+	}
+}
+
+void we_are_ready() {
+	cin &gt;&gt; turret_total &gt;&gt; d &gt;&gt; r;
+	for (int i = 1; i &lt;= turret_total; i++) {
+		cin &gt;&gt; turret[i].x &gt;&gt; turret[i].y;
+	}
+	cin &gt;&gt; t;
+	mapp[n][m].Cake_or_not = true;
+	mapp[0][0].Is_it_an_ant_hole = true;
+}
+void let_play() {
+	//带填充 
+} 
+int main() {
+	we_are_ready();
+	let_play();
+//	game_result();//输出 
+	return 0;
+}
+
+void producing_ants() { //意义：蚂蚁洞产生蚂蚁 
+	ant_total++;
+	mapp[0][0].is_it_ant = true;
+	are_there_ants_in_the_cave = true;
+	if (ant_total % 6 == 0) {
+		now_level = ant_total / 6;
+	}
+	else {
+		now_level = ant_total / 6 + 1;
+	}
+	ant[ant_total].x = 0;
+	ant[ant_total].y = 0;
+	ant[ant_total].level = now_level;
+	ant[ant_total].HP = 1;
+	for (int i = 1; i &lt;= ant[ant_total].level; i++) {
+		ant[ant_total].HP *= 1.1;
+	}
+	ant[ant_total].HP *= 4;
+}
+bool is_it_dead(int x) {//参数：查询的是哪只蚂蚁 ；意义：是否死亡 
+	if (ant[x].HP &lt; 0) return true;
+	return false;
+}
+void leave_pheromone(int x) {//参数：这是哪只蚂蚁；意义：留下信息素 
+	if (ant[x].is_there_a_cake){
+		mapp[ant[x].x][ant[x].y].pheromone += 5;
+	}
+	else {
+		mapp[ant[x].x][ant[x].y].pheromone += 2;
+	}
+}
+int choose_direction(int x) {//参数：这是哪只蚂蚁；意义：选择前进方向 
+	if(mapp[ant[x].x][ant[x].y + 1].is_it_ant || mapp[ant[x].x][ant[x].y + 1].battery_or_not) ph_4[1].phh = false;
+	if(mapp[ant[x].x + 1][ant[x].y].is_it_ant || mapp[ant[x].x + 1][ant[x].y].battery_or_not) ph_4[2].phh = false;
+	if(mapp[ant[x].x][ant[x].y - 1].is_it_ant || mapp[ant[x].x][ant[x].y - 1].battery_or_not) ph_4[3].phh = false;
+	if(mapp[ant[x].x - 1][ant[x].y].is_it_ant || mapp[ant[x].x - 1][ant[x].y].battery_or_not) ph_4[4].phh = false;
+	int flag = 0;
+	for (int i = 1; i &lt;= 4; i++) {
+		if (ph_4[i].phh) flag++;
+	}
+	if (flag &gt; 1) {
+		ph_4[1].ph = mapp[ant[x].x][ant[x].y + 1].pheromone;
+		ph_4[2].ph = mapp[ant[x].x + 1][ant[x].y].pheromone;
+		ph_4[3].ph = mapp[ant[x].x][ant[x].y - 1].pheromone;
+		ph_4[4].ph = mapp[ant[x].x - 1][ant[x].y].pheromone;
+		sort(ph_4 + 1, ph_4 + 4 + 1, choose_direction_cmp);
+		if (ph_4[1] == ph_4[2]) {
+			if (!mapp[ant[x].x][ant[x].y + 1].battery_or_not &amp;&amp; !mapp[ant[x].x][ant[x].y + 1].is_it_ant) {
+				
+			}
+		}
+		else {
+			for (int i = 1; i &lt;= 4; i++) {
+				if (ph_4[1] == pph_4[i]) return i;
+			}
+		}
+	}
+	else {
+		for (int i = 1; i &lt;= 4; i++) {
+			if (can_go[i]) return i;
+		}
+	}
+}
+</code></pre>
+<p>看到了？窝一直在更改选择方向的函数，懂？</p>
+<hr>
+<h2 id="day-雾20200428">Day ∞（雾（2020.04.28）</h2>
+<h3 id="久-等-了"><s>久　　等　　了</s></h3>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+#include&lt;cmath&gt;
+#define line cout &lt;&lt; endl
+using namespace std;
+const int NR = 25;
+const int MR = 200005;
+const int MAP = 10;
+struct Ant {
+	int x, y;//坐标 
+	int direction;//1东,2南,3西,4北 
+	bool is_there_a_cake = false;//是否有蛋糕 
+	int age;//年龄 
+	int HP;//血量 
+	int level;//等级 
+};
+struct Map {
+	int pheromone;//信息素 
+	bool battery_or_not = false;//是否有炮台 
+	bool Cake_or_not = false;//是否有蛋糕 
+	bool Is_it_an_ant_hole = false;//是否为蚂蚁洞 
+	bool is_it_ant = false;
+};
+struct Turret {
+	int x, y;//坐标 
+};
+struct Ph_4 {
+		int ph;//信息素 
+		bool phh = true;//能否通过 
+};
+Ph_4 ph_4[5];
+Turret turret[NR];
+Ant ant[MR];
+Map mapp[MAP][MAP];
+int n, m, t, d, r;
+int ant_total;
+int turret_total;
+int now_level;
+bool are_there_ants_in_the_cave = false;
+
+void producing_ants();//产生蚂蚁 
+bool is_it_dead();//是否死亡 
+void leave_pheromone();//留下信息素
+int choose_direction();//选择方向
+void ant_go(int dir);//蚂蚁前进，参数：前进的方向 
+
+bool choose_direction_cmp(Ph_4 x, Ph_4 y) {
+	if (x.ph &gt; y.ph) {
+		return true;
+	}
+	else {
+		x.phh 
+	}
+}
+
+void we_are_ready() {
+	cin &gt;&gt; turret_total &gt;&gt; d &gt;&gt; r;
+	for (int i = 1; i &lt;= turret_total; i++) {
+		cin &gt;&gt; turret[i].x &gt;&gt; turret[i].y;
+	}
+	cin &gt;&gt; t;
+	mapp[n][m].Cake_or_not = true;
+	mapp[0][0].Is_it_an_ant_hole = true;
+}
+void let_play() {
+	//带填充 
+} 
+int main() {
+	we_are_ready();
+	let_play();
+//	game_result();//输出 
+	return 0;
+}
+
+void producing_ants() { //意义：蚂蚁洞产生蚂蚁 
+	ant_total++;
+	mapp[0][0].is_it_ant = true;
+	are_there_ants_in_the_cave = true;
+	if (ant_total % 6 == 0) {
+		now_level = ant_total / 6;
+	}
+	else {
+		now_level = ant_total / 6 + 1;
+	}
+	ant[ant_total].x = 0;
+	ant[ant_total].y = 0;
+	ant[ant_total].level = now_level;
+	ant[ant_total].HP = 1;
+	for (int i = 1; i &lt;= ant[ant_total].level; i++) {
+		ant[ant_total].HP *= 1.1;
+	}
+	ant[ant_total].HP *= 4;
+}
+bool is_it_dead(int x) {//参数：查询的是哪只蚂蚁 ；意义：是否死亡 
+	if (ant[x].HP &lt; 0) return true;
+	return false;
+}
+void leave_pheromone(int x) {//参数：这是哪只蚂蚁；意义：留下信息素 
+	if (ant[x].is_there_a_cake){
+		mapp[ant[x].x][ant[x].y].pheromone += 5;
+	}
+	else {
+		mapp[ant[x].x][ant[x].y].pheromone += 2;
+	}
+}
+int choose_direction(int x) {//参数：这是哪只蚂蚁；意义：选择前进方向 
+	if(mapp[ant[x].x][ant[x].y + 1].is_it_ant || mapp[ant[x].x][ant[x].y + 1].battery_or_not) ph_4[1].phh = false;
+	if(mapp[ant[x].x + 1][ant[x].y].is_it_ant || mapp[ant[x].x + 1][ant[x].y].battery_or_not) ph_4[2].phh = false;
+	if(mapp[ant[x].x][ant[x].y - 1].is_it_ant || mapp[ant[x].x][ant[x].y - 1].battery_or_not) ph_4[3].phh = false;
+	if(mapp[ant[x].x - 1][ant[x].y].is_it_ant || mapp[ant[x].x - 1][ant[x].y].battery_or_not) ph_4[4].phh = false;
+	int flag = 0;
+	for (int i = 1; i &lt;= 4; i++) {
+		if (ph_4[i].phh) flag++;
+	}
+	if (flag &gt; 1) {
+		ph_4[1].ph = mapp[ant[x].x][ant[x].y + 1].pheromone;
+		ph_4[2].ph = mapp[ant[x].x + 1][ant[x].y].pheromone;
+		ph_4[3].ph = mapp[ant[x].x][ant[x].y - 1].pheromone;
+		ph_4[4].ph = mapp[ant[x].x - 1][ant[x].y].pheromone;
+		sort(ph_4 + 1, ph_4 + 4 + 1, choose_direction_cmp);
+		if (ph_4[1] == ph_4[2]) {
+			if (!mapp[ant[x].x][ant[x].y + 1].battery_or_not &amp;&amp; !mapp[ant[x].x][ant[x].y + 1].is_it_ant) {
+				
+			}
+		}
+		else {
+			for (int i = 1; i &lt;= 4; i++) {
+				if (ph_4[1] == pph_4[i]) return i;
+			}
+		}
+	}
+	else {
+		for (int i = 1; i &lt;= 4; i++) {
+			if (can_go[i]) return i;
+		}
+	}
+}
+void ans_go(int dir, int x) { //蚂蚁前进，参数：前进的方向 ；这是第几只蚂蚁 
+	mapp[ant[x].x][ant[x].y].is_it_ant = false;
+	switch (dir) {
+		case 1:
+			ant[x].y++;
+			break;
+		case 2:
+			ant[x].x++;
+			break;
+		case 3:
+			ant[x].y--;
+			break;
+		case 4:
+			ant[x].x--;
+			break;
+	}
+	mapp[ant[x].x][ant[x].y].is_it_ant = true;
+	if (!ant[x].is_there_a_cake) mapp[ant[x].x][ant[x].y].pheromone += 2;
+	else mapp[ant[x].x][ant[x].y].pheromone += 5;
+}
+</code></pre>
+<p>实在想不出来怎么搞方向了，写了一下蚂蚁前进的函数 qwq</p>
+<h2 id="20200428">2020.04.28</h2>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+#include&lt;cmath&gt;
+#define line cout &lt;&lt; endl
+using namespace std;
+const int NR = 25;
+const int MR = 200005;
+const int MAP = 10;
+struct Ant {
+	int x, y;//坐标 
+	int direction;//1东,2南,3西,4北 
+	bool is_there_a_cake = false;//是否有蛋糕 
+	int age;//年龄 
+	int HP;//血量 
+	int level;//等级 
+};
+struct Map {
+	int pheromone;//信息素 
+	bool battery_or_not = false;//是否有炮台 
+	bool Cake_or_not = false;//是否有蛋糕 
+	bool Is_it_an_ant_hole = false;//是否为蚂蚁洞 
+	bool is_it_ant = false;
+};
+struct Turret {
+	int x, y;//坐标 
+};
+struct Ph_4 {
+		int ph;//信息素 
+		bool phh = true;//能否通过 
+		int dir;//方向 
+};
+Ph_4 ph_4[5];
+Turret turret[NR];
+Ant ant[MR];
+Map mapp[MAP][MAP];
+int n, m, t, d, r;
+int ant_total;
+int turret_total;
+int now_level;
+bool are_there_ants_in_the_cave = false;
+
+void producing_ants();//产生蚂蚁 
+bool is_it_dead();//是否死亡 
+void leave_pheromone();//留下信息素
+int choose_direction();//选择方向
+void ant_go(int dir);//蚂蚁前进，参数：前进的方向 
+
+bool choose_direction_cmp(Ph_4 x, Ph_4 y) {
+	return x.ph &gt; y.ph; 
+}
+
+void we_are_ready() {
+	cin &gt;&gt; turret_total &gt;&gt; d &gt;&gt; r;
+	for (int i = 1; i &lt;= turret_total; i++) {
+		cin &gt;&gt; turret[i].x &gt;&gt; turret[i].y;
+	}
+	cin &gt;&gt; t;
+	mapp[n][m].Cake_or_not = true;
+	mapp[0][0].Is_it_an_ant_hole = true;
+}
+void let_play() {
+	//带填充 
+} 
+int main() {
+	we_are_ready();
+	let_play();
+//	game_result();//输出 
+	return 0;
+}
+
+void producing_ants() { //意义：蚂蚁洞产生蚂蚁 
+	ant_total++;
+	mapp[0][0].is_it_ant = true;
+	are_there_ants_in_the_cave = true;
+	if (ant_total % 6 == 0) {
+		now_level = ant_total / 6;
+	}
+	else {
+		now_level = ant_total / 6 + 1;
+	}
+	ant[ant_total].x = 0;
+	ant[ant_total].y = 0;
+	ant[ant_total].level = now_level;
+	ant[ant_total].HP = 1;
+	for (int i = 1; i &lt;= ant[ant_total].level; i++) {
+		ant[ant_total].HP *= 1.1;
+	}
+	ant[ant_total].HP *= 4;
+}
+bool is_it_dead(int x) {//参数：查询的是哪只蚂蚁 ；意义：是否死亡 
+	if (ant[x].HP &lt; 0) return true;
+	return false;
+}
+void leave_pheromone(int x) {//参数：这是哪只蚂蚁；意义：留下信息素 
+	if (ant[x].is_there_a_cake){
+		mapp[ant[x].x][ant[x].y].pheromone += 5;
+	}
+	else {
+		mapp[ant[x].x][ant[x].y].pheromone += 2;
+	}
+}
+int choose_direction(int x) {//参数：这是哪只蚂蚁；意义：选择前进方向 
+	ph_4[1].dir = 1;
+	ph_4[2].dir = 2;
+	ph_4[3].dir = 3;
+	ph_4[4].dir = 4;
+	if(mapp[ant[x].x][ant[x].y + 1].is_it_ant || mapp[ant[x].x][ant[x].y + 1].battery_or_not) ph_4[1].phh = false;
+	if(mapp[ant[x].x + 1][ant[x].y].is_it_ant || mapp[ant[x].x + 1][ant[x].y].battery_or_not) ph_4[2].phh = false;
+	if(mapp[ant[x].x][ant[x].y - 1].is_it_ant || mapp[ant[x].x][ant[x].y - 1].battery_or_not) ph_4[3].phh = false;
+	if(mapp[ant[x].x - 1][ant[x].y].is_it_ant || mapp[ant[x].x - 1][ant[x].y].battery_or_not) ph_4[4].phh = false;
+	int flag = 0;
+	for (int i = 1; i &lt;= 4; i++) {
+		if (ph_4[i].phh) flag++;
+	}
+	if (flag &gt; 1) {
+		ph_4[1].ph = mapp[ant[x].x][ant[x].y + 1].pheromone;
+		ph_4[2].ph = mapp[ant[x].x + 1][ant[x].y].pheromone;
+		ph_4[3].ph = mapp[ant[x].x][ant[x].y - 1].pheromone;
+		ph_4[4].ph = mapp[ant[x].x - 1][ant[x].y].pheromone;
+		sort(ph_4 + 1, ph_4 + 4 + 1, choose_direction_cmp);
+		if (ph_4[1].ph == ph_4[2].ph || ph_4[2].ph == ph_4[3].ph) {
+			if (!mapp[ant[x].x][ant[x].y + 1].battery_or_not &amp;&amp; !mapp[ant[x].x][ant[x].y + 1].is_it_ant) {
+				
+			}
+		}
+		else {
+			for (int i = 1; i &lt;= 4; i++) {
+				if (ph_4[1] == pph_4[i]) return i;
+			}
+		}
+	}
+	else {
+		for (int i = 1; i &lt;= 4; i++) {
+			if (can_go[i]) return i;
+		}
+	}
+}
+void ans_go(int dir, int x) { //蚂蚁前进，参数：前进的方向 ；这是第几只蚂蚁 
+	mapp[ant[x].x][ant[x].y].is_it_ant = false;
+	switch (dir) {
+		case 1:
+			ant[x].y++;
+			break;
+		case 2:
+			ant[x].x++;
+			break;
+		case 3:
+			ant[x].y--;
+			break;
+		case 4:
+			ant[x].x--;
+			break;
+	}
+	mapp[ant[x].x][ant[x].y].is_it_ant = true;
+	leave_pheromone(x);
+}
+</code></pre>
+<p>想到了选择方向的方法qwq</p>
+<hr>
+<h2 id="20200501">2020.05.01</h2>
+<p>五一劳动节，去劳动了（</p>
+<p>所以…… <s>没咕</s></p>
+<p>更勤奋了（</p>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+#include&lt;cmath&gt;
+#define line cout &lt;&lt; endl
+using namespace std;
+const int NR = 25;
+const int MR = 200005;
+const int MAP = 10;
+struct Ant {
+	int x, y;//坐标 
+	int direction;//1东,2南,3西,4北 
+	bool is_there_a_cake = false;//是否有蛋糕 
+	int age;//年龄 
+	int HP;//血量 
+	int level;//等级 
+};
+struct Map {
+	int pheromone;//信息素 
+	bool battery_or_not = false;//是否有炮台 
+	bool Cake_or_not = false;//是否有蛋糕 
+	bool Is_it_an_ant_hole = false;//是否为蚂蚁洞 
+	bool is_it_ant = false;
+};
+struct Turret {
+	int x, y;//坐标 
+};
+struct Ph_4 {
+		int ph;//信息素 
+		bool phh = true;//能否通过
+		int dir;//方向 
+};
+Ph_4 ph_4[5];
+Turret turret[NR];
+Ant ant[MR];
+Map mapp[MAP][MAP];
+int n, m, t, d, r;
+int ant_total;
+int turret_total;
+int now_level;
+bool are_there_ants_in_the_cave = false;
+
+void producing_ants();//产生蚂蚁 
+bool is_it_dead();//是否死亡 
+void leave_pheromone();//留下信息素
+int choose_direction();//选择方向
+void ant_go(int dir);//蚂蚁前进，参数：前进的方向 
+
+bool choose_direction_cmp(Ph_4 x, Ph_4 y) {
+	return x.ph &gt; y.ph; 
+}
+
+void we_are_ready() {
+	cin &gt;&gt; turret_total &gt;&gt; d &gt;&gt; r;
+	for (int i = 1; i &lt;= turret_total; i++) {
+		cin &gt;&gt; turret[i].x &gt;&gt; turret[i].y;
+	}
+	cin &gt;&gt; t;
+	mapp[n][m].Cake_or_not = true;
+	mapp[0][0].Is_it_an_ant_hole = true;
+}
+void let_play() {
+	//带填充 
+} 
+int main() {
+	we_are_ready();
+	let_play();
+//	game_result();//输出 
+	return 0;
+}
+
+void producing_ants() { //意义：蚂蚁洞产生蚂蚁 
+	ant_total++;
+	mapp[0][0].is_it_ant = true;
+	are_there_ants_in_the_cave = true;
+	if (ant_total % 6 == 0) {
+		now_level = ant_total / 6;
+	}
+	else {
+		now_level = ant_total / 6 + 1;
+	}
+	ant[ant_total].x = 0;
+	ant[ant_total].y = 0;
+	ant[ant_total].level = now_level;
+	ant[ant_total].HP = 1;
+	for (int i = 1; i &lt;= ant[ant_total].level; i++) {
+		ant[ant_total].HP *= 1.1;
+	}
+	ant[ant_total].HP *= 4;
+}
+bool is_it_dead(int x) {//参数：查询的是哪只蚂蚁 ；意义：是否死亡 
+	if (ant[x].HP &lt; 0) return true;
+	return false;
+}
+void leave_pheromone(int x) {//参数：这是哪只蚂蚁；意义：留下信息素 
+	if (ant[x].is_there_a_cake){
+		mapp[ant[x].x][ant[x].y].pheromone += 5;
+	}
+	else {
+		mapp[ant[x].x][ant[x].y].pheromone += 2;
+	}
+}
+int choose_direction(int x) {//参数：这是哪只蚂蚁；意义：选择前进方向 
+	ph_4[1].dir = 1;
+	ph_4[2].dir = 2;
+	ph_4[3].dir = 3;
+	ph_4[4].dir = 4;
+	if(mapp[ant[x].x][ant[x].y + 1].is_it_ant || mapp[ant[x].x][ant[x].y + 1].battery_or_not || ant[x].y &gt;= m) ph_4[1].phh = false;
+	if(mapp[ant[x].x + 1][ant[x].y].is_it_ant || mapp[ant[x].x + 1][ant[x].y].battery_or_not || ant[x].x &gt;= n) ph_4[2].phh = false;
+	if(mapp[ant[x].x][ant[x].y - 1].is_it_ant || mapp[ant[x].x][ant[x].y - 1].battery_or_not || ant[x].y &lt;= 0) ph_4[3].phh = false;
+	if(mapp[ant[x].x - 1][ant[x].y].is_it_ant || mapp[ant[x].x - 1][ant[x].y].battery_or_not || ant[x].x &lt;= 0) ph_4[4].phh = false;
+	int flag = 0;
+	for (int i = 1; i &lt;= 4; i++) {
+		if (ph_4[i].phh) flag++;
+	}
+	if (flag &gt; 1) {//如果有多个方向上没有障碍物 
+		ph_4[1].ph = mapp[ant[x].x][ant[x].y + 1].pheromone;
+		ph_4[2].ph = mapp[ant[x].x + 1][ant[x].y].pheromone;
+		ph_4[3].ph = mapp[ant[x].x][ant[x].y - 1].pheromone;
+		ph_4[4].ph = mapp[ant[x].x - 1][ant[x].y].pheromone;
+		sort(ph_4 + 1, ph_4 + 4 + 1, choose_direction_cmp);
+		if (ph_4[1].ph == ph_4[2].ph) {//如果有多个方向上的信息素相等
+			int flag = 1;//当前查到哪个方向了 
+			for (int i = 1; i &lt;= 4; i++) {
+				
+			} 
+		}
+		else {
+			return ph_4[1].dir;
+		}
+	}
+	else {
+		for (int i = 1; i &lt;= 4; i++) {
+			if (ph_4[i].phh) return ph_4[i].dir;
+		}
+	}
+}
+void ans_go(int dir, int x) { //蚂蚁前进，参数：前进的方向 ；这是第几只蚂蚁 
+	mapp[ant[x].x][ant[x].y].is_it_ant = false;
+	switch (dir) {
+		case 1:
+			ant[x].y++;
+			break;
+		case 2:
+			ant[x].x++;
+			break;
+		case 3:
+			ant[x].y--;
+			break;
+		case 4:
+			ant[x].x--;
+			break;
+	}
+	mapp[ant[x].x][ant[x].y].is_it_ant = true;
+	leave_pheromone(x);
+}
+</code></pre>
+<hr>
+<h2 id="day-20200508">Day 2020.05.08</h2>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstring&gt;
+#include&lt;cmath&gt;
+#define line cout &lt;&lt; endl
+using namespace std;
+const int NR = 25;
+const int MR = 200005;
+const int MAP = 10;
+struct Ant {
+	int x, y;//坐标 
+	int direction;//1东,2南,3西,4北 
+	bool is_there_a_cake = false;//是否有蛋糕 
+	int age;//年龄 
+	int HP;//血量 
+	int level;//等级 
+};
+struct Map {
+	int pheromone;//信息素 
+	bool battery_or_not = false;//是否有炮台 
+	bool Cake_or_not = false;//是否有蛋糕 
+	bool Is_it_an_ant_hole = false;//是否为蚂蚁洞 
+	bool is_it_ant = false;
+};
+struct Turret {
+	int x, y;//坐标 
+};
+struct Ph_4 {
+		int ph;//信息素 
+		bool phh = true;//能否通过
+		int dir;//方向 
+};
+Ph_4 ph_4[5];
+Turret turret[NR];
+Ant ant[MR];
+Map mapp[MAP][MAP];
+int n, m, t, d, r;
+int ant_total;
+int turret_total;
+int now_level;
+bool are_there_ants_in_the_cave = false;
+
+void producing_ants();//产生蚂蚁 
+bool is_it_dead();//是否死亡 
+void leave_pheromone();//留下信息素
+int choose_direction();//选择方向
+void ant_go(int dir);//蚂蚁前进，参数：前进的方向 
+
+bool choose_direction_cmp(Ph_4 x, Ph_4 y) {
+	return x.ph &gt; y.ph; 
+}
+
+void we_are_ready() {
+	cin &gt;&gt; turret_total &gt;&gt; d &gt;&gt; r;
+	for (int i = 1; i &lt;= turret_total; i++) {
+		cin &gt;&gt; turret[i].x &gt;&gt; turret[i].y;
+	}
+	cin &gt;&gt; t;
+	mapp[n][m].Cake_or_not = true;
+	mapp[0][0].Is_it_an_ant_hole = true;
+}
+void let_play() {
+	//带填充 
+} 
+int main() {
+	we_are_ready();
+	let_play();
+//	game_result();//输出 
+	return 0;
+}
+
+void producing_ants() { //意义：蚂蚁洞产生蚂蚁 
+	ant_total++;
+	mapp[0][0].is_it_ant = true;
+	are_there_ants_in_the_cave = true;
+	if (ant_total % 6 == 0) {
+		now_level = ant_total / 6;
+	}
+	else {
+		now_level = ant_total / 6 + 1;
+	}
+	ant[ant_total].x = 0;
+	ant[ant_total].y = 0;
+	ant[ant_total].level = now_level;
+	ant[ant_total].HP = 1;
+	for (int i = 1; i &lt;= ant[ant_total].level; i++) {
+		ant[ant_total].HP *= 1.1;
+	}
+	ant[ant_total].HP *= 4;
+}
+bool is_it_dead(int x) {//参数：查询的是哪只蚂蚁 ；意义：是否死亡 
+	if (ant[x].HP &lt; 0) return true;
+	return false;
+}
+void leave_pheromone(int x) {//参数：这是哪只蚂蚁；意义：留下信息素 
+	if (ant[x].is_there_a_cake){
+		mapp[ant[x].x][ant[x].y].pheromone += 5;
+	}
+	else {
+		mapp[ant[x].x][ant[x].y].pheromone += 2;
+	}
+}
+int choose_direction(int x) {//参数：这是哪只蚂蚁；意义：选择前进方向 
+	ph_4[1].dir = 1;
+	ph_4[2].dir = 2;
+	ph_4[3].dir = 3;
+	ph_4[4].dir = 4;
+	if(mapp[ant[x].x][ant[x].y + 1].is_it_ant || mapp[ant[x].x][ant[x].y + 1].battery_or_not || ant[x].y &gt;= m) ph_4[1].phh = false;
+	if(mapp[ant[x].x + 1][ant[x].y].is_it_ant || mapp[ant[x].x + 1][ant[x].y].battery_or_not || ant[x].x &gt;= n) ph_4[2].phh = false;
+	if(mapp[ant[x].x][ant[x].y - 1].is_it_ant || mapp[ant[x].x][ant[x].y - 1].battery_or_not || ant[x].y &lt;= 0) ph_4[3].phh = false;
+	if(mapp[ant[x].x - 1][ant[x].y].is_it_ant || mapp[ant[x].x - 1][ant[x].y].battery_or_not || ant[x].x &lt;= 0) ph_4[4].phh = false;
+	int flag = 0;
+	for (int i = 1; i &lt;= 4; i++) {
+		if (ph_4[i].phh) flag++;
+	}
+	if (flag &gt; 1) {//如果有多个方向上没有障碍物 
+		ph_4[1].ph = mapp[ant[x].x][ant[x].y + 1].pheromone;
+		ph_4[2].ph = mapp[ant[x].x + 1][ant[x].y].pheromone;
+		ph_4[3].ph = mapp[ant[x].x][ant[x].y - 1].pheromone;
+		ph_4[4].ph = mapp[ant[x].x - 1][ant[x].y].pheromone;
+		sort(ph_4 + 1, ph_4 + 4 + 1, choose_direction_cmp);
+		if (ph_4[1].ph == ph_4[2].ph) {//如果有多个方向上的信息素相等
+			int flag = 1;//当前查到哪个方向了 
+			for (int i = 1; i &lt;= 4; i++) {
+				
+			} 
+		}
+		else {
+			return ph_4[1].dir;
+		}
+	}
+	else {
+		for (int i = 1; i &lt;= 4; i++) {
+			if (ph_4[i].phh) return ph_4[i].dir;
+		}
+	}
+}
+void ans_go(int dir, int x) { //蚂蚁前进，参数：前进的方向 ；这是第几只蚂蚁 
+	mapp[ant[x].x][ant[x].y].is_it_ant = false;
+	switch (dir) {
+		case 1:
+			ant[x].y++;
+			break;
+		case 2:
+			ant[x].x++;
+			break;
+		case 3:
+			ant[x].y--;
+			break;
+		case 4:
+			ant[x].x--;
+			break;
+	}
+	mapp[ant[x].x][ant[x].y].is_it_ant = true;
+	leave_pheromone(x);
+}
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://github.com/TNTtian/C6H2CH3-NO2-3-HOME/post/_tnt_/">
+                <h3 class="post-title">
+                  _TNT_
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
+
+          
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://github.com/TNTtian/C6H2CH3-NO2-3-HOME/images/avatar.png?v=1589268442826" class="no-responsive avatar">
+    <div class="text-muted">向着自己的梦想，前进！</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://github.com/TNTtian/C6H2CH3-NO2-3-HOME/post/sha-ma-yi/">杀蚂蚁</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://github.com/TNTtian/C6H2CH3-NO2-3-HOME/post/_tnt_/">_TNT_</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://github.com/TNTtian/C6H2CH3-NO2-3-HOME/post/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://github.com/TNTtian/C6H2CH3-NO2-3-HOME/post/hello-gridea/">Hello Gridea</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://github.com/TNTtian/C6H2CH3-NO2-3-HOME/tag/U91QGiHP_/" class="badge success">
+          Gridea
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://github.com/TNTtian/C6H2CH3-NO2-3-HOME/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
